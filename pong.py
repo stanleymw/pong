@@ -7,7 +7,7 @@ pygame.init()
 
 
 
-AUTO_PLAY = False
+AUTO_PLAY = True
 VISUALIZE_DIRECTION = False
 
 
@@ -93,6 +93,11 @@ while True:
     if pressed[pygame.K_s]:
         paddle_left.y += paddle_speed
 
+    # auto play
+    if AUTO_PLAY:
+        paddle_right.centery += clip(-paddle_speed, paddle_speed, ball.centery - paddle_right.centery)
+        # paddle_left.centery = ball.centery
+
     # clamp paddles
     if paddle_left.bottom >= HEIGHT:
         paddle_left.bottom = HEIGHT
@@ -104,9 +109,7 @@ while True:
     if paddle_right.top <= 0:
         paddle_right.top = 0
 
-    if AUTO_PLAY:
-        paddle_right.centery = ball.centery
-        paddle_left.centery = ball.centery
+
 
 
     #ball_angle += 1
